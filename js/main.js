@@ -4,7 +4,6 @@ const seriesName = document.querySelector(".js-series-name");
 
 
 function paintElement(dataElement) {
-    console.log(dataElement.show);
     let codeHTML = '';
     codeHTML +='<div>';
     codeHTML +='<div>'
@@ -27,8 +26,7 @@ function manageDataResult(data){
     for (let index = 0; index < data.length; index += 1){
         codeHTML += paintElement(data[index])
     }
-    seriesName.innerHTML = '';
-    seriesName.innerHTML += codeHTML;
+    seriesName.innerHTML = codeHTML;
 };
 
 function getInfo() {
@@ -40,6 +38,7 @@ function getInfo() {
         manageDataResult(data);
       });
 }
+
   
   const btn = document.querySelector(".js-button");
   btn.addEventListener("click",getInfo);
