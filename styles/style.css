@@ -1,0 +1,11 @@
+.js-image{
+    height:250px;
+    width:200px;
+}
+.js-series-name{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:space-around;
+    
+}
