@@ -49,3 +49,11 @@ font-weight: bold;
         padding:10px;
     }
 }
+.image-cross-container{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+}
+.show-name{
+    flex-grow:3;
+}

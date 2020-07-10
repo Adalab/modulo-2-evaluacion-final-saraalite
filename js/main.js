@@ -22,14 +22,13 @@ function paintElement(dataElement) {
   codeHTML += "</div>";
   return codeHTML;
 }
-//FAVORITOS
-function paintFavorites(dataElement) {
+
+function paintElementWhenFavorite(dataElement) {
     let codeHTML = "";
-    codeHTML += `<div class="js-series-container-favorite" id="${dataElement.show.id}">`;
+    codeHTML += `<div class="js-series-container favorite" id="${dataElement.show.id}">`;
     codeHTML += "<div>";
     codeHTML += dataElement.show.name;
     codeHTML += "</div>";
-
     codeHTML += "<div>";
     if (dataElement.show.image) {
       codeHTML += `<img src="${dataElement.show.image.original}" alt="${dataElement.show.name}" title="${dataElement.show.name}" class="js-image"/>`;
@@ -38,10 +37,31 @@ function paintFavorites(dataElement) {
           text=TV" alt="${dataElement.show.name}" title="${dataElement.show.name}" class="js-image"/>`;
     }
     codeHTML += "</div>";
-    codeHTML += `<div class="delete-favorite>`;
+    codeHTML += "</div>";
+    return codeHTML;
+  }
+
+//FAVORITOS
+function paintFavorites(dataElement) {
+    let codeHTML = "";
+    codeHTML += `<article class="js-series-container-favorite" id="${dataElement.show.id}">`;
+    codeHTML += "<section>";
+    codeHTML += dataElement.show.name;
+    codeHTML += "</section>";
+    codeHTML += `<article class="image-cross-container">`
+    codeHTML += "<div>";
+    if (dataElement.show.image) {
+      codeHTML += `<img src="${dataElement.show.image.original}" alt="${dataElement.show.name}" title="${dataElement.show.name}" class="js-image"/>`;
+    } else {
+      codeHTML += `<img src="https://via.placeholder.com/210x295/ffffff/666666/?
+          text=TV" alt="${dataElement.show.name}" title="${dataElement.show.name}" class="js-image"/>`;
+    }
+    codeHTML += "</div>";
+    codeHTML += `<span class="delete-favorite">`;
     codeHTML += "☒"
-    codeHTML += "</div>";
-    codeHTML += "</div>";
+    codeHTML += "</span>";
+    codeHTML += "</article>"
+    codeHTML += "</article>";
     return codeHTML;
   }
   function handleFavorites(series) {
@@ -62,7 +82,8 @@ function addFavorite(event) {
     // Si está 
     // la eliminamos
     if (serieId===favorites[index].show.id){
-        favorites.pop(series[index]);
+        console.log(index)
+        favorites.splice(index, 1);
         notInFavorites = false;
       }
   }
@@ -98,7 +119,21 @@ function manageDataResult(data) {
     codeHTML="No conozco esa serie, lo siento";
   }
   for (let index = 0; index < data.length; index += 1) {
+    let notInFavorites = true;
+    // for para saber si una serie está en favoritas
+    for (let i = 0; i < favorites.length; i += 1){
+        if (favorites[i].show.id === data[index].show.id){
+            notInFavorites = false;
+        }
+    }
+    
+    // si no está en favoritas
+    if(notInFavorites===true){
     codeHTML += paintElement(data[index]);
+    } else {
+    // si está en favoritas
+    codeHTML += paintElementWhenFavorite(data[index]);
+}
   }
   seriesName.innerHTML = codeHTML;
   addEventListenerToSeries();
