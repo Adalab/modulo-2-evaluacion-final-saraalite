@@ -1,6 +1,6 @@
 "use strict";
 
-const seriesName = document.querySelector(".js-series-name");
+const seriesName = document.querySelector(".js-series-section");
 const favoritesSection= document.querySelector(".favorites-container")
 let series =  [];
 let favorites =[];
