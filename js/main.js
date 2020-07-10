@@ -3,8 +3,8 @@
 const seriesName = document.querySelector(".js-series-name");
 const favoritesSection= document.querySelector(".favorites-container")
 let series =  [];
-const favorites =[];
-
+let favorites =[];
+//Pinta elementos en lado derecho
 function paintElement(dataElement) {
   let codeHTML = "";
   codeHTML += `<div class="js-series-container" id="${dataElement.show.id}">`;
@@ -22,7 +22,7 @@ function paintElement(dataElement) {
   codeHTML += "</div>";
   return codeHTML;
 }
-
+//FAVORITOS
 function paintFavorites(dataElement) {
     let codeHTML = "";
     codeHTML += `<div class="js-series-container-favorite" id="${dataElement.show.id}">`;
@@ -40,26 +40,13 @@ function paintFavorites(dataElement) {
     codeHTML += "</div>";
     return codeHTML;
   }
-
-
   function handleFavorites(series) {
     let codeHTML = "";
     for (let index = 0; index < series.length; index += 1) {
       codeHTML += paintFavorites(series[index]);
     }
     favoritesSection.innerHTML = codeHTML;
-  
   }
-
-
-/*     console.log(event.currentTarget);
-    current = event.currentTarget;
-    console.log(current)
-    console.log(event)  */
-// Con esto cogemos el texto que hay en el div, es decir, el nombre de la serie
-// current.children[0].innerText !!
-//seriesName.innerHTML = event.currentTarget.innerHTML;
-
 
 function addFavorite(event) {
   event.currentTarget.classList.toggle("favorite");
@@ -73,8 +60,10 @@ function addFavorite(event) {
    }
   }
 handleFavorites(favorites);
+saveInfoInLocalStorage();
 }
 
+//EVENT LISTENER
 function addEventListenerToSeries() {
   const seriesContainers = document.querySelectorAll(".js-series-container");
   for (let index = 0; index < seriesContainers.length; index += 1) {
@@ -82,29 +71,21 @@ function addEventListenerToSeries() {
     console.log(seriesContainers[index]);
   }
 }
-
-
+//RECOPILA la info de pintar datos y el addEventListener
 function manageDataResult(data) {
   let codeHTML = "";
-  // Mirar lo que hay en data por si no hay datos
   if (data.length === 0) {
-    console.log("No hay datos");
+    codeHTML="No conozco esa serie, lo siento";
   }
   for (let index = 0; index < data.length; index += 1) {
     codeHTML += paintElement(data[index]);
   }
   seriesName.innerHTML = codeHTML;
-  /*     addEventListenerToSeries(); */
   addEventListenerToSeries();
 
 }
 
-
-/* const imgData= `data.path.currentSrc`;
-console.log(imgData);
-const seriesTitle=`data.path.0.alt`; */
-
-
+//API
 
 function getInfoFromApi() {
   event.preventDefault();
@@ -121,15 +102,21 @@ function getInfoFromApi() {
 
 
 
-/* function saveInfoInLocalStorage() {
-    localStorage.setItem(, JSON.stringify(data));
+ function saveInfoInLocalStorage() {
+    localStorage.setItem('favorites',JSON.stringify(favorites));
   }
   
-  function getInfofromLocalStorage() {
-    return JSON.parse(localStorage.getItem('data'));
-  }
-   */
+ function getInfofromLocalStorage() {
+    const result= JSON.parse(localStorage.getItem('favorites')) ;
+    if (result===null){
+        return [];
+    }else {
+        favorites = result;
+        return favorites;
+    }
+}
 
+handleFavorites(getInfofromLocalStorage());
 
 
 const btn = document.querySelector(".js-button");
