@@ -57,3 +57,7 @@ font-weight: bold;
 .show-name{
     flex-grow:3;
 }
+.js-delete-favorite{
+    cursor:pointer;
+    font-size:30px;
+}
