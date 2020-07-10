@@ -8,14 +8,23 @@
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
   <body>
+    <div class="flex-container">
+      <div class="side-left">
       <h1>Buscador de series:</h1>
       <p>Introduce aquí el nombre de la serie</p> 
     <form>
         <label for="input"></label>
         <input class="input js-input" id="input" name="input" type="text" placeholder="Girls"></br>
         <input class="button js-button" type="submit" value="Buscar">
-        </form> 
+    </form>
+    <div class="favorites-container">
+      
+    </div>
+      </div> 
+      <div class="main-content">
         <div class="js-series-name"></div>
+      </div>
+    </div>
     <script src="./js/main.js"></script>
   </body>
 </html

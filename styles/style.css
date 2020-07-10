@@ -9,3 +9,22 @@
     justify-content:space-around;
     
 }
+.favorite{
+    background-color:grey;
+    color:white;
+
+}
+.flex-container{
+display:flex;
+flex-direction:row;
+flex-wrap:nowrap;
+height:100%;
+}
+.side-left{
+background-color:pink;
+min-width:30vw;
+height:100%;
+}
+.main-content{
+background-color:blue;
+}
