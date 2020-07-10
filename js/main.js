@@ -29,6 +29,7 @@ function paintFavorites(dataElement) {
     codeHTML += "<div>";
     codeHTML += dataElement.show.name;
     codeHTML += "</div>";
+
     codeHTML += "<div>";
     if (dataElement.show.image) {
       codeHTML += `<img src="${dataElement.show.image.original}" alt="${dataElement.show.name}" title="${dataElement.show.name}" class="js-image"/>`;
@@ -36,6 +37,9 @@ function paintFavorites(dataElement) {
       codeHTML += `<img src="https://via.placeholder.com/210x295/ffffff/666666/?
           text=TV" alt="${dataElement.show.name}" title="${dataElement.show.name}" class="js-image"/>`;
     }
+    codeHTML += "</div>";
+    codeHTML += `<div class="delete-favorite>`;
+    codeHTML += "☒"
     codeHTML += "</div>";
     codeHTML += "</div>";
     return codeHTML;
@@ -50,25 +54,41 @@ function paintFavorites(dataElement) {
 
 function addFavorite(event) {
   event.currentTarget.classList.toggle("favorite");
-  console.log('Pint id selected serie', event.currentTarget.id);
   const serieId=  parseInt(event.currentTarget.id);
 
-  for (let index = 0; index < series.length; index += 1) {
-   if (serieId===series[index].show.id){
-       favorites.push(series[index]);
-       console.log(favorites);
-   }
+  // Buscamos si la serie ya está en el array de favoritos
+  let notInFavorites = true;
+  for (let index = 0; index < favorites.length; index += 1){
+    // Si está 
+    // la eliminamos
+    if (serieId===favorites[index].show.id){
+        favorites.pop(series[index]);
+        notInFavorites = false;
+      }
   }
-handleFavorites(favorites);
-saveInfoInLocalStorage();
+
+  // SI no ... (else)
+  if (notInFavorites === true){
+      // Buscamos la serie en nuestro array de series y lo añadimos al array de favoritos
+    for (let index = 0; index < series.length; index += 1) {
+        if (serieId===series[index].show.id) {
+            favorites.push(series[index]);
+        }
+    }
+  }
+
+  handleFavorites(favorites);
+  saveInfoInLocalStorage();
+
 }
+    
+  
 
 //EVENT LISTENER
 function addEventListenerToSeries() {
   const seriesContainers = document.querySelectorAll(".js-series-container");
   for (let index = 0; index < seriesContainers.length; index += 1) {
     seriesContainers[index].addEventListener("click", addFavorite);
-    console.log(seriesContainers[index]);
   }
 }
 //RECOPILA la info de pintar datos y el addEventListener
