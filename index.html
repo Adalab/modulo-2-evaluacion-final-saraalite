@@ -5,23 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Evaluación final módulo 2 - Sara Alite Villodre</title>
+      <!--  Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+        <!--  Our stylesheet -->
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
   <body class="main-container">
     <header class="search-bar">
-      <h1>Buscador de series:</h1>
+      <h1 class="main-title">Buscador de series:</h1>
     <form>
         <label for="input"></label>
         <input class="input js-input" id="input" name="input" type="text" placeholder="Introduce tu búsqueda aquí"></br>
+        <div class="button-container">
         <input class="button js-button" type="submit" value="Buscar">
+        </div>
     </form>
+
     </header>
     <div class="flex-container">
       <div class="side-left">
        <div class="side-left-text-container">
-    <p>Aquí tienes tus series favoritas:</p>
+    <p class="favorites-text">Aquí tienes tus series favoritas:</p>
+
     <div class="favorites-container">
     </div>
+    <form>
+      <input class="js-delete-favorites-button" type="submit" value="Borrar todas">
+  </form>
       </div> 
       </div> 
       <div class="main-content">
