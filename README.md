@@ -1,6 +1,7 @@
 # modulo-2-evaluacion-final-saraalite
  http://beta.adalab.es/modulo-2-evaluacion-final-saraalite/
-ES
+
+//ES
 Para arrancar este proyecto clona este repositorio en tu ordenador, ábrelo con un editor de código y abre un servidor local para ver el proyecto en funcionamiento.
 También puedes hacer click en en enlace que puedes ver en la descripción de este repositorio, junto al nombre del mismo.
 El proyecto consiste en un buscador de series que, conectado a una API, muestra los resultados de una búsqueda. 
