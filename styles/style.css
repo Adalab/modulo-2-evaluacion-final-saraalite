@@ -1,3 +1,19 @@
+.search-bar{
+    background-color:red;
+    display:flex;
+    flex-direction:column;
+    margin-bottom:50px;
+    justify-content:center;
+    align-items:center;
+    align-content:center;
+
+}
+.js-button{
+    align-self:center;
+    margin-top:20px;
+    margin-bottom:10px;
+    margin-left:auto;
+}
 .js-image{
     height:100px;
     width:80px;
