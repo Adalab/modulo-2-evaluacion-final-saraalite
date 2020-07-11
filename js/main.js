@@ -1,4 +1,26 @@
 "use strict";
+//DIAGRAMA DE FLUJO CON FUNCIONES
+/* Arranca la página y se ejecuta handlefavorites()
+
+		  handleFavorites=> paintFavorites && eventListener(-de la X- addOrRemoveFromFavorite)
+
+Tb favorites=getInfoFromLocalStorage()
+
+Cuando se introduce búsqueda y click en botón Buscar => getInfoFromApi => manageDataResult=>
+
+    	manageDataResult=>paintElement || paintElementWhenFavorite && addEventListenerToSeries=>
+
+Cuando la usuaria hace click en un contenedor:
+
+    	addEventListenerToSeries(en el contenedor)=>addOrRemoveFromFavorite
+
+	    addOrRemoveFromFavorite	=>splice || push into favorites && =>handleFavorites && 	=>manageDataResult && =>saveInfoInLocalStorage
+		
+	  	handleFavorites=> paintFavorites && eventListener( -de la X- addOrRemoveFromFavorite)
+
+Cuando la usuaria hace click en botón Borrar favoritos => addEventListener (deleteAllFavorites)
+	    deleteAllFavorites=>handleFavorites && manageDataResult */
+
 
 const seriesName = document.querySelector(".js-series-section");
 const favoritesSection = document.querySelector(".favorites-container");
@@ -67,6 +89,7 @@ function paintFavorites(dataElement) {
   codeHTML += "</article>";
   return codeHTML;
 }
+
 function handleFavorites() {
   let codeHTML = "";
   for (let index = 0; index < favorites.length; index += 1) {
@@ -77,11 +100,11 @@ function handleFavorites() {
   const deleteFavorite = document.querySelectorAll(".js-delete-favorite");
 
   for (let index = 0; index < deleteFavorite.length; index += 1) {
-    deleteFavorite[index].addEventListener("click", addFavorite);
+    deleteFavorite[index].addEventListener("click", addOrRemoveFromFavorite);
   }
 }
 
-function addFavorite(event) {
+function addOrRemoveFromFavorite(event) {
   event.currentTarget.classList.toggle("favorite");
   const serieId = parseInt(event.currentTarget.id);
 
@@ -106,40 +129,42 @@ function addFavorite(event) {
     }
   }
   handleFavorites();
-  manageDataResult(series)
+  manageDataResult()
   saveInfoInLocalStorage();
 }
 
-//EVENT LISTENER
+//EVENT LISTENER para contenedores de series (no botones)
 function addEventListenerToSeries() {
   const seriesContainers = document.querySelectorAll(".js-series-container");
   for (let index = 0; index < seriesContainers.length; index += 1) {
-    seriesContainers[index].addEventListener("click", addFavorite);
+    seriesContainers[index].addEventListener("click", addOrRemoveFromFavorite);
   }
 }
+
+
 //Recopila la info de pintar datos y el addEventListener
 
 //Si devuelve un array de longitud 0 muestra mensaje de error
-function manageDataResult(data) {
+function manageDataResult() {
   let codeHTML = "";
-  if (data.length === 0) {
+  if (series.length === 0) {
     codeHTML = "No conozco esa serie, lo siento";
   }
-  for (let index = 0; index < data.length; index += 1) {
+  for (let index = 0; index < series.length; index += 1) {
     let notInFavorites = true;
     // for para saber si una serie está en favoritas
     for (let i = 0; i < favorites.length; i += 1) {
-      if (favorites[i].show.id === data[index].show.id) {
+      if (favorites[i].show.id === series[index].show.id) {
         notInFavorites = false;
       }
     }
 
     // si no está en favoritas lo pinta todo con normalidad (sin la clase "favorite")
     if (notInFavorites === true) {
-      codeHTML += paintElement(data[index]);
+      codeHTML += paintElement(series[index]);
     } else {
       // si está en favoritas
-      codeHTML += paintElementWhenFavorite(data[index]);
+      codeHTML += paintElementWhenFavorite(series[index]);
     }
   }
   seriesName.innerHTML = codeHTML;
@@ -155,7 +180,7 @@ function getInfoFromApi(event) {
     .then((response) => response.json())
     .then((data) => {
       series = data;
-      manageDataResult(data);
+      manageDataResult();
     });
 }
 
@@ -175,9 +200,9 @@ function getInfofromLocalStorage() {
 
 function deleteAllFavorites(event){
     event.preventDefault();
-    console.log("holi");
     favorites = [];
     handleFavorites();
+    manageDataResult();
     localStorage.setItem("favorites", JSON.stringify(favorites));
    
 }
@@ -189,3 +214,11 @@ const btn = document.querySelector(".js-button");
 btn.addEventListener("click", getInfoFromApi);
 deleteButton.addEventListener("click",deleteAllFavorites);
 addEventListenerToSeries();
+
+
+/* const serieToSave = {
+  show: {
+    name: favorites.show.name,
+  }
+};
+ */
