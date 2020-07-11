@@ -3,7 +3,7 @@
 
 //ES
 Para arrancar este proyecto clona este repositorio en tu ordenador, ábrelo con un editor de código y abre un servidor local para ver el proyecto en funcionamiento.
-También puedes hacer click en en enlace que puedes ver en la descripción de este repositorio, junto al nombre del mismo o al principio de este readme.
+También puedes hacer click en el enlace que puedes ver en la descripción de este repositorio, junto al nombre del mismo o al principio de este readme.
 El proyecto consiste en un buscador de series que, conectado a una API, muestra los resultados de una búsqueda. 
 También permite añadir series a una lista de favoritos, eliminarlas de la misma y vaciar la lista, almacenando la información en local storage para poder acceder tras refrescar la página.
 
