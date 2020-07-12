@@ -1,5 +1,5 @@
 "use strict";
-//DIAGRAMA DE FLUJO CON FUNCIONES
+//DIAGRAMA DE FLUJO A TRAVÉS DE LAS FUNCIONES
 /* Arranca la página y se ejecuta handlefavorites()
 
 		  handleFavorites=> paintFavorites && eventListener(-de la X- addOrRemoveFromFavorite)
@@ -186,7 +186,33 @@ function getInfoFromApi(event) {
     });
 }
 
+function transformFavorites(favorites){
+  const serieToSave = []
+  for (let i = 0; i < favorites.length; i += 1){
+    if (favorites[i].show.image){
+      serieToSave.push({
+        show: {
+          name:favorites[i].show.name, 
+          image: {
+            original : favorites[i].show.image.original,
+          }
+        }
+      })    
+    } else {
+      serieToSave.push({
+        show: {
+          name:favorites[i].show.name,
+        }
+      })
+    }
+  }
+  return serieToSave;
+}
+
+
+
 function saveInfoInLocalStorage() {
+  // favorites=transformFavorites(favorites);
   localStorage.setItem("favorites", JSON.stringify(favorites));
 }
 
@@ -217,10 +243,3 @@ btn.addEventListener("click", getInfoFromApi);
 deleteButton.addEventListener("click",deleteAllFavorites);
 addEventListenerToSeries();
 
-
-/* const serieToSave = {
-  show: {
-    name: favorites.show.name,
-  }
-};
- */
