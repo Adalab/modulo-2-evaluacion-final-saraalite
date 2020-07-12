@@ -99,6 +99,8 @@ function handleFavorites() {
 
   const deleteFavorite = document.querySelectorAll(".js-delete-favorite");
 
+  //addEventListener de la X
+
   for (let index = 0; index < deleteFavorite.length; index += 1) {
     deleteFavorite[index].addEventListener("click", addOrRemoveFromFavorite);
   }
