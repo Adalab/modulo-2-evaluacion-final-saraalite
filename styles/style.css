@@ -164,6 +164,7 @@ font-weight: bold;
 .js-series-container{
     padding:20px;
     font-family: 'Montserrat', sans-serif;
+    cursor:pointer;
 }
 .js-series-container-favorite{
     font-family: 'Montserrat', sans-serif;
