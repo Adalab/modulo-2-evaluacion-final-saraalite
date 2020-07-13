@@ -216,10 +216,3 @@ btn.addEventListener("click", getInfoFromApi);
 deleteButton.addEventListener("click",deleteAllFavorites);
 addEventListenerToSeries();
 
-
-/* const serieToSave = {
-  show: {
-    name: favorites.show.name,
-  }
-};
- */
