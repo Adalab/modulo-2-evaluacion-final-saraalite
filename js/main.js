@@ -113,15 +113,14 @@ function addOrRemoveFromFavorite(event) {
   // Buscamos si la serie ya está en el array de favoritos
   let notInFavorites = true;
   for (let index = 0; index < favorites.length; index += 1) {
-    // Si está
-    // la eliminamos
+    // Si está, la eliminamos
     if (serieId === favorites[index].show.id) {
       favorites.splice(index, 1);
       notInFavorites = false;
     }
   }
 
-  // SI no ... (else)
+  // SI no ... 
   if (notInFavorites === true) {
     // Buscamos la serie en nuestro array de series y lo añadimos al array de favoritos
     for (let index = 0; index < series.length; index += 1) {
