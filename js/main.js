@@ -25,6 +25,7 @@ Cuando la usuaria hace click en botón Borrar favoritos => addEventListener (del
 const seriesName = document.querySelector(".js-series-section");
 const favoritesSection = document.querySelector(".favorites-container");
 const deleteButton = document.querySelector(".js-delete-favorites-button");
+const numberButton=document.querySelector(".js-number-favorites");
 
 let series = [];
 let favorites = [];
@@ -35,6 +36,12 @@ function paintElement(dataElement) {
   codeHTML += "<div>";
   codeHTML += dataElement.show.name;
   codeHTML += "</div>";
+  codeHTML += "<p>"
+  codeHTML += `${dataElement.show.status}`
+  codeHTML += "</p>"
+  codeHTML += "<p>"
+  codeHTML += `${dataElement.show.language}`
+  codeHTML += "</p>"
   codeHTML += "<div>";
   if (dataElement.show.image) {
     codeHTML += `<img src="${dataElement.show.image.original}" alt="${dataElement.show.name}" title="${dataElement.show.name}" class="js-image"/>`;
@@ -208,11 +215,22 @@ function deleteAllFavorites(event){
    
 }
 
+
+
+function showNumberFavorites(event){
+event.preventDefault();
+console.log(favorites.length)
+}
+
+
+
+
 favorites = getInfofromLocalStorage()
 handleFavorites();
 
 const btn = document.querySelector(".js-button");
 btn.addEventListener("click", getInfoFromApi);
+numberButton.addEventListener("click",showNumberFavorites);
 deleteButton.addEventListener("click",deleteAllFavorites);
 addEventListenerToSeries();
 
